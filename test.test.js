@@ -41,6 +41,19 @@ describe("Test", () => {
       expect(nvim.prefix).toBeDefined();
       let result = await nvim.request(`${nvim.prefix}feedkeys`, [":vsp", "m", true]);
       expect(result).toBe(null);
+      result = await nvim.request(`${nvim.prefix}get_vvar`, ["errmsg"]);
+      expect(result).toBe("");
+      result = await nvim.request(`${nvim.prefix}get_api_info`);
+      expect(result).toHaveLength(2);
+      expect(result[1].functions).toBeDefined();
+      result[1].functions = "removed";
+      result[1].ui_events = "removed";
+      console.log(JSON.stringify(result, undefined, 2));
+
+      
+//      //print vars
+//      result = await nvim.request(`${nvim.prefix}exec`, ["let"]);
+//      expect(result).toBe(true);
 
       
       nvim.command('vsp');
