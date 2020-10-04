@@ -1,3 +1,5 @@
+const google = require("./google");
+
 function onBufWrite() {
   console.log('Buffer written!');
 }
